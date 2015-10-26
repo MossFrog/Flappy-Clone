@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "Main.h"
 
 int main()
 {
@@ -9,17 +9,24 @@ int main()
 	window.setFramerateLimit(60);
 	window.setKeyRepeatEnabled(false);
 
-	sf::RectangleShape player;
-	player.setSize(sf::Vector2f(100,50));
-	player.setPosition(152,360);
-	player.setFillColor(sf::Color::Red);
+	//-- Call the loadResources function --//
+	loadResources();
+
+	Player.setTexture(playerTexture);
+	Player.setTextureRect(sf::IntRect(0,0,16,16));
+	Player.setPosition(152,360);
+	Player.setScale(5,5);
+	
+	int playerState = 0;
 
 	int playerFallSpeed = 1;
 	int gravity = 1;
 
-	//-- initialize the main game clock --//
-	sf::Clock mainClock;
+	//-- initialize the main game clock and animation clock --//
 	mainClock.restart();
+	animationClock.restart();
+
+	
 
 
 	while (window.isOpen())
@@ -35,7 +42,7 @@ int main()
 			{
 				if (event.key.code == sf::Keyboard::A)
 				{
-					playerFallSpeed -= 30;
+					playerFallSpeed -= 25;
 				}
 			}
 		}
@@ -43,22 +50,38 @@ int main()
 		if(mainClock.getElapsedTime() >= sf::milliseconds(15))
 		{
 			playerFallSpeed += gravity;
-			player.move(0,playerFallSpeed);
+			Player.move(0,playerFallSpeed);
 			mainClock.restart();
 		}
 
-
-
-		if(playerFallSpeed <= -30)
+		if(animationClock.getElapsedTime() >= sf::milliseconds(100))
 		{
-			playerFallSpeed = -30;
+			playerState += 16;
+			if(playerState > 48)
+			{
+				playerState = 0;
+			}
+			Player.setTextureRect(sf::IntRect(playerState,0,16,16));
+			animationClock.restart();
+		}
+
+
+		//-- Limit the speeds in the x and y axis --//
+		if(playerFallSpeed <= -25)
+		{
+			playerFallSpeed = -25;
+		}
+
+		if(playerFallSpeed >= 25)
+		{
+			playerFallSpeed = 25;
 		}
 
 
 		//-- Any drawing methods after screen clear --//
-		window.clear();
+		window.clear(sf::Color::White);
 
-		window.draw(player);
+		window.draw(Player);
 
 		window.display();
 	}
