@@ -12,6 +12,10 @@ using namespace std;
 sf::Texture playerTexture;
 sf::Sprite Player;
 
+//-- Environmental Textures --//
+sf::Texture backGround;
+sf::Sprite bgSprite;
+
 //-- Clocks --//
 sf::Clock mainClock;
 sf::Clock animationClock;
@@ -23,6 +27,10 @@ void loadResources()
 
 
 	//-- Textures --//
+	if (!backGround.loadFromFile("backGround.png"))
+	{}
+	else
+	{ cout << "Loaded the texture 'background'" << endl; }
 
 
 	//-- Spritesheets --//

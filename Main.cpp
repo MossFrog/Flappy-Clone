@@ -12,10 +12,16 @@ int main()
 	//-- Call the loadResources function --//
 	loadResources();
 
+	//-- Set the static sprites --//
+	bgSprite.setTexture(backGround);
+	bgSprite.setPosition(0,0);
+
 	Player.setTexture(playerTexture);
 	Player.setTextureRect(sf::IntRect(0,0,16,16));
 	Player.setPosition(152,360);
 	Player.setScale(5,5);
+
+	
 	
 	int playerState = 0;
 
@@ -80,6 +86,8 @@ int main()
 
 		//-- Any drawing methods after screen clear --//
 		window.clear(sf::Color::White);
+		window.draw(bgSprite);
+
 
 		window.draw(Player);
 
