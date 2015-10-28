@@ -21,18 +21,22 @@ int main()
 	Player.setPosition(100,152);
 	Player.setScale(3,3);
 
-	
-	
+
+
 	int playerState = 0;
 
 	int playerFallSpeed = 1;
 	int gravity = 1;
 
+	//-- GameState variable, 0 == menu, 1 == playing, 2 == game over --//
+	int GameState = 0;
+	int countDown = 0;
+
 	//-- initialize the main game clock and animation clock --//
 	mainClock.restart();
 	animationClock.restart();
 
-	
+
 
 
 	while (window.isOpen())
@@ -46,31 +50,70 @@ int main()
 			//-- If the specified key is pressed push the player upwards --//
 			if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == sf::Keyboard::A)
+				if (event.key.code == sf::Keyboard::Space)
 				{
 					playerFallSpeed = -15;
 				}
 			}
 		}
 
-		if(mainClock.getElapsedTime() >= sf::milliseconds(15))
-		{
-			playerFallSpeed += gravity;
-			Player.move(0,playerFallSpeed);
-			mainClock.restart();
-		}
 
-		if(animationClock.getElapsedTime() >= sf::milliseconds(100))
+		//-- Start the game if G key is pressed --//
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
 		{
-			playerState += 16;
-			if(playerState > 48)
+			if(GameState == 0)
 			{
-				playerState = 0;
+				countDownClock.restart();
+
 			}
-			Player.setTextureRect(sf::IntRect(playerState,0,16,16));
-			animationClock.restart();
 		}
 
+		if(GameState == 0)
+		{
+			if(countDownClock.getElapsedTime() >= sf::seconds(1))
+			{
+				countDown += 1;
+				countDownClock.restart();
+			}
+
+			if(countDown == 1)
+			{
+
+			}
+
+			else if(countDown == 2)
+			{
+
+			}
+
+			else if(countDown == 3)
+			{
+				GameState = 1;
+			}
+		}
+
+		if(GameState == 1)
+		{
+
+			if(mainClock.getElapsedTime() >= sf::milliseconds(15))
+			{
+				playerFallSpeed += gravity;
+				Player.move(0,playerFallSpeed);
+				mainClock.restart();
+			}
+
+			if(animationClock.getElapsedTime() >= sf::milliseconds(100))
+			{
+				playerState += 16;
+				if(playerState > 48)
+				{
+					playerState = 0;
+				}
+				Player.setTextureRect(sf::IntRect(playerState,0,16,16));
+				animationClock.restart();
+			}
+
+		}
 
 		//-- Limit the speeds in the x and y axis --//
 		if(playerFallSpeed <= -25)
@@ -88,8 +131,10 @@ int main()
 		window.clear(sf::Color::White);
 		window.draw(bgSprite);
 
-
-		window.draw(Player);
+		if(GameState == 1)
+		{
+			window.draw(Player);
+		}
 
 		window.display();
 	}

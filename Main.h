@@ -19,6 +19,7 @@ sf::Sprite bgSprite;
 //-- Clocks --//
 sf::Clock mainClock;
 sf::Clock animationClock;
+sf::Clock countDownClock; // Countdown when the game starts
 
 //-- Get all the external resources, sprites and fonts --//
 void loadResources()
