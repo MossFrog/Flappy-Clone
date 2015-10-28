@@ -27,7 +27,7 @@ void loadResources()
 
 
 	//-- Textures --//
-	if (!backGround.loadFromFile("backGround.png"))
+	if (!backGround.loadFromFile("backGround.jpg"))
 	{}
 	else
 	{ cout << "Loaded the texture 'background'" << endl; }

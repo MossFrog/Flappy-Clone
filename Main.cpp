@@ -5,7 +5,7 @@ int main()
 	//--  Set the resolution to 9:16 preferred resolution for mobile phones --//
 	//-- Disable keyrepeat events to make the game tap oriented --//
 	//-- Limit the framerate to prevent screen tearing --//
-	sf::RenderWindow window(sf::VideoMode(405, 720), "Flappy Bird Clone", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
 	window.setFramerateLimit(60);
 	window.setKeyRepeatEnabled(false);
 
@@ -18,8 +18,8 @@ int main()
 
 	Player.setTexture(playerTexture);
 	Player.setTextureRect(sf::IntRect(0,0,16,16));
-	Player.setPosition(152,360);
-	Player.setScale(5,5);
+	Player.setPosition(100,152);
+	Player.setScale(3,3);
 
 	
 	
@@ -48,7 +48,7 @@ int main()
 			{
 				if (event.key.code == sf::Keyboard::A)
 				{
-					playerFallSpeed -= 25;
+					playerFallSpeed = -15;
 				}
 			}
 		}
