@@ -6,11 +6,14 @@ int main()
 	//-- Disable keyrepeat events to make the game tap oriented --//
 	//-- Limit the framerate to prevent screen tearing --//
 	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(100);
 	window.setKeyRepeatEnabled(false);
 
 	//-- Call the loadResources function --//
 	loadResources();
+
+	//-- Menu variables --//
+
 
 	//-- Set the static sprites --//
 	bgSprite.setTexture(backGround);
@@ -115,7 +118,7 @@ int main()
 
 		}
 
-		//-- Limit the speeds in the x and y axis --//
+		//-- Limit the speeds on the x and y axis --//
 		if(playerFallSpeed <= -25)
 		{
 			playerFallSpeed = -25;

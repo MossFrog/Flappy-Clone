@@ -16,6 +16,13 @@ sf::Sprite Player;
 sf::Texture backGround;
 sf::Sprite bgSprite;
 
+sf::Texture towerTexture;
+sf::Sprite towerMoving;
+
+//-- Menu variables --//
+sf::Texture idleBird;
+sf::Sprite menuBird;
+
 //-- Clocks --//
 sf::Clock mainClock;
 sf::Clock animationClock;
@@ -33,12 +40,23 @@ void loadResources()
 	else
 	{ cout << "Loaded the texture 'background'" << endl; }
 
+	if (!towerTexture.loadFromFile("towerTexture.png"))
+	{}
+	else
+	{ cout << "Loaded the texture 'Tower'" << endl; }
+
 
 	//-- Spritesheets --//
 	if (!playerTexture.loadFromFile("ravenFlying.png"))
 	{}
 	else
 	{ cout << "Loaded the spritesheet for 'Raven Flying'" << endl; }
+
+	//-- Menu --//
+	if (!idleBird.loadFromFile("ravenSitting.png"))
+	{}
+	else
+	{ cout << "Loaded the spritesheet for 'Raven Sitting'" << endl; }
 }
 
 
