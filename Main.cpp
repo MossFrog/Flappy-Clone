@@ -12,15 +12,22 @@ int main()
 	//-- Call the loadResources function --//
 	loadResources();
 
-	//-- Menu variables --//
-	menuBird.setTexture(idleBird);
+	//-- Menu Variables --//
 	menuText.setFont(mainFont);
 	menuText.setString("Flappy Crow");
 	menuText.setPosition(100,100);
 
+	menuBird.setTexture(idleBird);
+	menuBird.setPosition(400,200);
+	menuBird.setScale(10,10);
+	menuBird.setTextureRect(sf::IntRect(0,0,16,16));
+	int menuBirdState = 0;
+	//-- Starting Variables --//
 	countDownText.setFont(mainFont);
 	countDownText.setPosition(350,100);
 	countDownText.setString("3");
+
+
 
 	//-- Set the static sprites --//
 	bgSprite.setTexture(backGround);
@@ -44,6 +51,7 @@ int main()
 	//-- initialize the main game clock and animation clock --//
 	mainClock.restart();
 	animationClock.restart();
+	menuClock.restart();
 
 
 
@@ -125,6 +133,18 @@ int main()
 
 		}
 
+		if(GameState == 0)
+		{
+			if(menuClock.getElapsedTime() >= sf::milliseconds(500))
+			{
+				menuBirdState += 16;
+				if(menuBirdState > 48)
+				{ menuBirdState = 0; }
+				menuBird.setTextureRect(sf::IntRect(menuBirdState,0,16,16));
+				menuClock.restart();
+			}
+		}
+
 		//-- Limit the speeds on the x and y axis --//
 		if(playerFallSpeed <= -25)
 		{
@@ -145,6 +165,7 @@ int main()
 		if(GameState == 0)
 		{
 			window.draw(menuText);
+			window.draw(menuBird);
 		}
 
 		//-- Game renders --//
