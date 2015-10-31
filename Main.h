@@ -22,6 +22,7 @@ sf::Sprite towerMoving;
 //-- Menu variables --//
 sf::Texture idleBird;
 sf::Sprite menuBird;
+sf::Font mainFont;
 
 //-- Clocks --//
 sf::Clock mainClock;
@@ -32,7 +33,10 @@ sf::Clock countDownClock; // Countdown when the game starts
 void loadResources()
 {
 	//-- Fonts --//
-
+	if (!mainFont.loadFromFile("Pixel Emulator.ttf"))
+	{}
+	else
+	{ cout << "Loaded the font 'Pixel Emulator'" << endl; }
 
 	//-- Textures --//
 	if (!backGround.loadFromFile("backGround.jpg"))

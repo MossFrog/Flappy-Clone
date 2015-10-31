@@ -13,7 +13,7 @@ int main()
 	loadResources();
 
 	//-- Menu variables --//
-
+	menuBird.setTexture(idleBird);
 
 	//-- Set the static sprites --//
 	bgSprite.setTexture(backGround);
