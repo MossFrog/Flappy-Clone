@@ -14,6 +14,13 @@ int main()
 
 	//-- Menu variables --//
 	menuBird.setTexture(idleBird);
+	menuText.setFont(mainFont);
+	menuText.setString("Flappy Crow");
+	menuText.setPosition(100,100);
+
+	countDownText.setFont(mainFont);
+	countDownText.setPosition(350,100);
+	countDownText.setString("3");
 
 	//-- Set the static sprites --//
 	bgSprite.setTexture(backGround);
@@ -25,13 +32,12 @@ int main()
 	Player.setScale(3,3);
 
 
-
+	//-- Game physics and Animation variables --//
 	int playerState = 0;
-
 	int playerFallSpeed = 1;
 	int gravity = 1;
 
-	//-- GameState variable, 0 == menu, 1 == playing, 2 == game over --//
+	//-- GameState variable, 0 == menu, 3 == starting, 1 == playing, 2 == game over --//
 	int GameState = 0;
 	int countDown = 0;
 
@@ -66,12 +72,13 @@ int main()
 		{
 			if(GameState == 0)
 			{
+				GameState = 3;
 				countDownClock.restart();
 
 			}
 		}
 
-		if(GameState == 0)
+		if(GameState == 3)
 		{
 			if(countDownClock.getElapsedTime() >= sf::seconds(1))
 			{
@@ -81,12 +88,12 @@ int main()
 
 			if(countDown == 1)
 			{
-
+				countDownText.setString("2");
 			}
 
 			else if(countDown == 2)
 			{
-
+				countDownText.setString("1");
 			}
 
 			else if(countDown == 3)
@@ -134,10 +141,26 @@ int main()
 		window.clear(sf::Color::White);
 		window.draw(bgSprite);
 
+		//-- Menu Renders --//
+		if(GameState == 0)
+		{
+			window.draw(menuText);
+		}
+
+		//-- Game renders --//
 		if(GameState == 1)
 		{
 			window.draw(Player);
 		}
+
+		//-- Starting renders --//
+
+		if(GameState == 3)
+		{
+			window.draw(countDownText);
+		}
+
+		
 
 		window.display();
 	}

@@ -23,6 +23,8 @@ sf::Sprite towerMoving;
 sf::Texture idleBird;
 sf::Sprite menuBird;
 sf::Font mainFont;
+sf::Text menuText;
+sf::Text countDownText;
 
 //-- Clocks --//
 sf::Clock mainClock;
