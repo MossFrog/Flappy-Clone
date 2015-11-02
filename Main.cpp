@@ -6,7 +6,7 @@ int main()
 	//-- Disable keyrepeat events to make the game tap oriented --//
 	//-- Limit the framerate to prevent screen tearing --//
 	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
-	window.setFramerateLimit(100);
+	window.setFramerateLimit(120);
 	window.setKeyRepeatEnabled(false);
 
 	//-- Call the loadResources function --//
@@ -22,6 +22,7 @@ int main()
 	menuBird.setScale(10,10);
 	menuBird.setTextureRect(sf::IntRect(0,0,16,16));
 	int menuBirdState = 0;
+
 	//-- Starting Variables --//
 	countDownText.setFont(mainFont);
 	countDownText.setPosition(350,100);
@@ -38,6 +39,10 @@ int main()
 	Player.setPosition(100,152);
 	Player.setScale(3,3);
 
+	//-- Dynamic sprites (the Columns) --//
+	towerMoving.setTexture(towerTexture);
+	towerMoving.setPosition(600,200);
+	towerMoving.setScale(0.4,0.4);
 
 	//-- Game physics and Animation variables --//
 	int playerState = 0;
@@ -86,6 +91,7 @@ int main()
 			}
 		}
 
+		//-- Countdown section --//
 		if(GameState == 3)
 		{
 			if(countDownClock.getElapsedTime() >= sf::seconds(1))
@@ -110,6 +116,8 @@ int main()
 			}
 		}
 
+
+		//-- Gameplay Section --//
 		if(GameState == 1)
 		{
 
@@ -133,6 +141,7 @@ int main()
 
 		}
 
+		//-- Update the menu bird animation --//
 		if(GameState == 0)
 		{
 			if(menuClock.getElapsedTime() >= sf::milliseconds(500))
@@ -168,20 +177,23 @@ int main()
 			window.draw(menuBird);
 		}
 
-		//-- Game renders --//
+		//-- Game Renders --//
 		if(GameState == 1)
 		{
 			window.draw(Player);
+			window.draw(towerMoving);
 		}
 
-		//-- Starting renders --//
+		//-- Starting Renders --//
 
 		if(GameState == 3)
 		{
 			window.draw(countDownText);
 		}
 
-		
+		//-- Game over Renders --//
+		if(GameState == 2)
+		{}
 
 		window.display();
 	}
