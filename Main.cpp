@@ -58,8 +58,9 @@ int main()
 	animationClock.restart();
 	menuClock.restart();
 
-
-
+	//-- Audio Variables --//
+	sf::Sound flapSound;
+	flapSound.setBuffer(flapBuffer);
 
 	while (window.isOpen())
 	{
@@ -75,6 +76,9 @@ int main()
 				if (event.key.code == sf::Keyboard::Space)
 				{
 					playerFallSpeed = -15;
+					if(GameState == 1)
+					{ flapSound.play(); }
+					
 				}
 			}
 		}

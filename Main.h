@@ -32,6 +32,10 @@ sf::Clock animationClock;
 sf::Clock countDownClock; // Countdown when the game starts
 sf::Clock menuClock; // Clock for any menu animation effects
 
+//-- Audio --//
+sf::SoundBuffer flapBuffer;
+
+
 //-- Get all the external resources, sprites and fonts --//
 void loadResources()
 {
@@ -64,6 +68,13 @@ void loadResources()
 	{}
 	else
 	{ cout << "Loaded the spritesheet for 'Raven Sitting'" << endl; }
+
+	//-- Audio --//
+	if (!flapBuffer.loadFromFile("Randomize3.wav"))
+	{ }
+	else
+	{ cout << "Successfully loaded 'Randomize3.wav'" << endl; }
+
 }
 
 
