@@ -26,6 +26,9 @@ sf::Font mainFont;
 sf::Text menuText;
 sf::Text countDownText;
 
+//-- Game over Variables --//
+sf::Text GameOverText;
+
 //-- Clocks --//
 sf::Clock mainClock;
 sf::Clock animationClock;
@@ -34,6 +37,9 @@ sf::Clock menuClock; // Clock for any menu animation effects
 
 //-- Audio --//
 sf::SoundBuffer flapBuffer;
+
+sf::Music mainTheme;
+
 
 
 //-- Get all the external resources, sprites and fonts --//
@@ -75,6 +81,10 @@ void loadResources()
 	else
 	{ cout << "Successfully loaded 'Randomize3.wav'" << endl; }
 
+	if (!mainTheme.openFromFile("Blind Shift.ogg"))
+	{}
+	else
+	{ cout << "Loaded the audio file 'Blind Shift.ogg'" << endl; }
 }
 
 

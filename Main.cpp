@@ -64,6 +64,10 @@ int main()
 	//-- Audio Variables --//
 	sf::Sound flapSound;
 	flapSound.setBuffer(flapBuffer);
+	flapSound.setVolume(30);
+
+	mainTheme.setLoop(true);
+	mainTheme.play();
 
 	while (window.isOpen())
 	{
@@ -181,11 +185,6 @@ int main()
 
 		//-- Kill the player if the bird falls out of bounds --//
 		if(Player.getPosition().y >= 405)
-		{
-			GameState = 2;
-		}
-
-		if(Player.getPosition().y <= -10)
 		{
 			GameState = 2;
 		}
