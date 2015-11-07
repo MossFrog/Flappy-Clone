@@ -26,6 +26,11 @@ sf::Font mainFont;
 sf::Text menuText;
 sf::Text countDownText;
 
+//-- Score Variables --//
+sf::Text scoreText;
+int score;
+
+
 //-- Game over Variables --//
 sf::Text GameOverText;
 
@@ -37,7 +42,6 @@ sf::Clock menuClock; // Clock for any menu animation effects
 
 //-- Audio --//
 sf::SoundBuffer flapBuffer;
-
 sf::Music mainTheme;
 
 

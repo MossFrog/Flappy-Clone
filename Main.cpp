@@ -39,6 +39,7 @@ int main()
 
 	Player.setTexture(playerTexture);
 	Player.setTextureRect(sf::IntRect(0,0,16,16));
+	Player.setOrigin(Player.getGlobalBounds().width/2,Player.getGlobalBounds().height/2);
 	Player.setPosition(100,152);
 	Player.setScale(3,3);
 
@@ -67,6 +68,7 @@ int main()
 	flapSound.setVolume(30);
 
 	mainTheme.setLoop(true);
+	mainTheme.setVolume(100);
 	mainTheme.play();
 
 	while (window.isOpen())
@@ -85,6 +87,7 @@ int main()
 					playerFallSpeed = -15;
 					if(GameState == 1)
 					{ flapSound.play(); }
+					Player.setRotation(-40);
 					
 				}
 			}
@@ -143,6 +146,7 @@ int main()
 				playerFallSpeed += gravity;
 				Player.move(0,playerFallSpeed);
 				mainClock.restart();
+				Player.rotate(2);
 			}
 
 			if(animationClock.getElapsedTime() >= sf::milliseconds(100))
