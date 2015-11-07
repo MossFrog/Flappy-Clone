@@ -28,7 +28,10 @@ int main()
 	countDownText.setPosition(350,100);
 	countDownText.setString("3");
 
-
+	//-- Defining game over state --//
+	GameOverText.setFont(mainFont);
+	GameOverText.setString("Game Over");
+	GameOverText.setPosition(250,100);
 
 	//-- Set the static sprites --//
 	bgSprite.setTexture(backGround);
@@ -87,11 +90,17 @@ int main()
 		//-- Start the game if G key is pressed --//
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
 		{
-			if(GameState == 0)
+			if(GameState == 0 || GameState == 2)
 			{
 				GameState = 3;
 				countDownClock.restart();
 
+				//-- If this method is called reset all variables to prepare a game restart --//
+				playerState = 0;
+				playerFallSpeed = 1;
+				countDown = 0;
+				countDownText.setString("3");
+				Player.setPosition(100,152);
 			}
 		}
 
@@ -170,6 +179,18 @@ int main()
 		}
 
 
+		//-- Kill the player if the bird falls out of bounds --//
+		if(Player.getPosition().y >= 405)
+		{
+			GameState = 2;
+		}
+
+		if(Player.getPosition().y <= -10)
+		{
+			GameState = 2;
+		}
+
+
 		//-- Any drawing methods after screen clear --//
 		window.clear(sf::Color::White);
 		window.draw(bgSprite);
@@ -197,7 +218,9 @@ int main()
 
 		//-- Game over Renders --//
 		if(GameState == 2)
-		{}
+		{
+			window.draw(GameOverText);
+		}
 
 		window.display();
 	}
