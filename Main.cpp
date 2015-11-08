@@ -67,6 +67,10 @@ int main()
 	flapSound.setBuffer(flapBuffer);
 	flapSound.setVolume(30);
 
+	sf::Sound cawSound;
+	cawSound.setBuffer(cawBuffer);
+	cawSound.setVolume(75);
+
 	mainTheme.setLoop(true);
 	mainTheme.setVolume(100);
 	mainTheme.play();
@@ -190,6 +194,8 @@ int main()
 		//-- Kill the player if the bird falls out of bounds --//
 		if(Player.getPosition().y >= 405)
 		{
+			if(GameState == 1)
+			{ cawSound.play(); }
 			GameState = 2;
 		}
 

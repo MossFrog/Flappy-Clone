@@ -42,6 +42,8 @@ sf::Clock menuClock; // Clock for any menu animation effects
 
 //-- Audio --//
 sf::SoundBuffer flapBuffer;
+sf::SoundBuffer cawBuffer;
+
 sf::Music mainTheme;
 
 
@@ -84,6 +86,11 @@ void loadResources()
 	{ }
 	else
 	{ cout << "Successfully loaded 'Randomize3.wav'" << endl; }
+
+	if(!cawBuffer.loadFromFile("CrowCaw.ogg"))
+	{ }
+	else
+	{ cout << "Loaded 'CrowCaw.ogg'" << endl; }
 
 	if (!mainTheme.openFromFile("Blind Shift.ogg"))
 	{}
