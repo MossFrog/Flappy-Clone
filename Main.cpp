@@ -6,7 +6,7 @@ int main()
 	//-- Disable keyrepeat events to make the game tap oriented --//
 	//-- Limit the framerate to prevent screen tearing --//
 	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
-	window.setFramerateLimit(120);
+	//window.setFramerateLimit(120);
 	window.setKeyRepeatEnabled(false);
 
 	//-- Call the loadResources function --//
