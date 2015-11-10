@@ -16,8 +16,10 @@ sf::Sprite Player;
 sf::Texture backGround;
 sf::Sprite bgSprite;
 
-sf::Texture towerTexture;
-sf::Sprite towerMoving;
+sf::Texture treeTexture;
+sf::Sprite treeSprite;
+sf::Sprite treeSprite_top;
+
 
 //-- Menu variables --//
 sf::Texture idleBird;
@@ -63,10 +65,10 @@ void loadResources()
 	else
 	{ cout << "Loaded the texture 'background'" << endl; }
 
-	if (!towerTexture.loadFromFile("towerTexture.png"))
+	if (!treeTexture.loadFromFile("treeTexture.png"))
 	{}
 	else
-	{ cout << "Loaded the texture 'Tower'" << endl; }
+	{ cout << "Loaded the texture 'Tree'" << endl; }
 
 
 	//-- Spritesheets --//
@@ -85,7 +87,7 @@ void loadResources()
 	if (!flapBuffer.loadFromFile("Randomize3.wav"))
 	{ }
 	else
-	{ cout << "Successfully loaded 'Randomize3.wav'" << endl; }
+	{ cout << "Loaded the music file 'Randomize3.wav'" << endl; }
 
 	if(!cawBuffer.loadFromFile("CrowCaw.ogg"))
 	{ }
@@ -97,7 +99,5 @@ void loadResources()
 	else
 	{ cout << "Loaded the audio file 'Blind Shift.ogg'" << endl; }
 }
-
-
 
 #endif

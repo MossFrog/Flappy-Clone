@@ -40,13 +40,18 @@ int main()
 	Player.setTexture(playerTexture);
 	Player.setTextureRect(sf::IntRect(0,0,16,16));
 	Player.setOrigin(Player.getGlobalBounds().width/2,Player.getGlobalBounds().height/2);
-	Player.setPosition(100,152);
+	Player.setPosition(100,50);
 	Player.setScale(3,3);
 
 	//-- Dynamic sprites (the Columns) --//
-	towerMoving.setTexture(towerTexture);
-	towerMoving.setPosition(600,200);
-	towerMoving.setScale(0.4,0.4);
+	treeSprite.setTexture(treeTexture);
+	treeSprite.setPosition(600,200);
+	treeSprite.setScale(6,6);
+
+	treeSprite_top.setTexture(treeTexture);
+	treeSprite_top.setPosition(600,150);
+	treeSprite_top.setScale(6,-6);
+	
 
 	//-- Game physics and Animation variables --//
 	int playerState = 0;
@@ -111,7 +116,8 @@ int main()
 				playerFallSpeed = 1;
 				countDown = 0;
 				countDownText.setString("3");
-				Player.setPosition(100,152);
+				Player.setPosition(100,50);
+				Player.setRotation(340);
 			}
 		}
 
@@ -215,7 +221,8 @@ int main()
 		if(GameState == 1)
 		{
 			window.draw(Player);
-			window.draw(towerMoving);
+			window.draw(treeSprite);
+			window.draw(treeSprite_top);
 		}
 
 		//-- Starting Renders --//
