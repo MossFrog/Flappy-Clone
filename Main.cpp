@@ -1,4 +1,5 @@
 #include "Main.h"
+#include "strutils.h"
 
 int main()
 {
@@ -43,15 +44,33 @@ int main()
 	Player.setPosition(100,50);
 	Player.setScale(3,3);
 
-	//-- Dynamic sprites (the Columns) --//
+	//-- Dynamic sprites (the Trees) --//
 	treeSprite.setTexture(treeTexture);
 	treeSprite.setPosition(600,200);
 	treeSprite.setScale(6,6);
 
-	treeSprite_top.setTexture(treeTexture);
-	treeSprite_top.setPosition(600,150);
-	treeSprite_top.setScale(6,-6);
-	
+	treeSprite_2.setTexture(treeTexture);
+	treeSprite_2.setPosition(500,200);
+	treeSprite_2.setScale(6,6);
+
+	treeSprite_3.setTexture(treeTexture);
+	treeSprite_3.setPosition(400,230);
+	treeSprite_3.setScale(6,6);
+
+	treeSprite_3.setTexture(treeTexture);
+	treeSprite_3.setPosition(200,300);
+	treeSprite_3.setScale(6,6);
+
+	treeSprite_4.setTexture(treeTexture);
+	treeSprite_4.setPosition(100,175);
+	treeSprite_4.setScale(6,6);
+
+	//-- Score Variables --//
+	currentScore = 0;
+	scoreText.setFont(mainFont);
+	scoreText.setString("SCORE: 0");
+	scoreText.setPosition(500,10);
+	scoreText.setCharacterSize(20);
 
 	//-- Game physics and Animation variables --//
 	int playerState = 0;
@@ -118,6 +137,8 @@ int main()
 				countDownText.setString("3");
 				Player.setPosition(100,50);
 				Player.setRotation(340);
+				currentScore = 0;
+				scoreText.setString("SCORE: 0");
 			}
 		}
 
@@ -157,6 +178,7 @@ int main()
 				Player.move(0,playerFallSpeed);
 				mainClock.restart();
 				Player.rotate(2);
+				
 			}
 
 			if(animationClock.getElapsedTime() >= sf::milliseconds(100))
@@ -168,6 +190,10 @@ int main()
 				}
 				Player.setTextureRect(sf::IntRect(playerState,0,16,16));
 				animationClock.restart();
+
+				//-- We also determine the score to increment every 100ms so its convenient to use this clock --//
+				currentScore += 1;
+				scoreText.setString("SCORE: " + itoa(currentScore));
 			}
 
 		}
@@ -207,7 +233,9 @@ int main()
 
 
 		//-- Any drawing methods after screen clear --//
-		window.clear(sf::Color::White);
+		window.clear();
+
+		//-- Render the Background --//
 		window.draw(bgSprite);
 
 		//-- Menu Renders --//
@@ -220,9 +248,16 @@ int main()
 		//-- Game Renders --//
 		if(GameState == 1)
 		{
+			window.draw(scoreText);
+
 			window.draw(Player);
+
 			window.draw(treeSprite);
-			window.draw(treeSprite_top);
+			window.draw(treeSprite_2);
+			window.draw(treeSprite_3);
+			window.draw(treeSprite_4);
+
+			
 		}
 
 		//-- Starting Renders --//

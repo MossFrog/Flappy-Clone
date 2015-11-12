@@ -18,7 +18,11 @@ sf::Sprite bgSprite;
 
 sf::Texture treeTexture;
 sf::Sprite treeSprite;
-sf::Sprite treeSprite_top;
+sf::Sprite treeSprite_2;
+sf::Sprite treeSprite_3;
+sf::Sprite treeSprite_4;
+
+//-- Enemies --//
 
 
 //-- Menu variables --//
@@ -30,7 +34,7 @@ sf::Text countDownText;
 
 //-- Score Variables --//
 sf::Text scoreText;
-int score;
+int currentScore;
 
 
 //-- Game over Variables --//
@@ -99,5 +103,7 @@ void loadResources()
 	else
 	{ cout << "Loaded the audio file 'Blind Shift.ogg'" << endl; }
 }
+
+void randomTreePos(float & x, float & y);
 
 #endif
