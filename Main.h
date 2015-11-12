@@ -104,6 +104,24 @@ void loadResources()
 	{ cout << "Loaded the audio file 'Blind Shift.ogg'" << endl; }
 }
 
-void randomTreePos(float & x, float & y);
+float randomTreeX()
+{
+	float x = rand() % 500 + 100;
+	return x;
+}
+
+float randomTreeY()
+{
+	float y = rand() % 125 + 175;
+	return y;
+}
+
+void resetTree(sf::Sprite & tree)
+{
+	if(tree.getPosition().x < -100)
+	{
+		tree.setPosition(rand() % 200 + 720, randomTreeY());
+	}
+}
 
 #endif

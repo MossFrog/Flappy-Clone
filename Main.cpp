@@ -46,23 +46,23 @@ int main()
 
 	//-- Dynamic sprites (the Trees) --//
 	treeSprite.setTexture(treeTexture);
-	treeSprite.setPosition(600,200);
+	treeSprite.setPosition(randomTreeX(),randomTreeY());
 	treeSprite.setScale(6,6);
 
 	treeSprite_2.setTexture(treeTexture);
-	treeSprite_2.setPosition(500,200);
+	treeSprite_2.setPosition(randomTreeX(),randomTreeY());
 	treeSprite_2.setScale(6,6);
 
 	treeSprite_3.setTexture(treeTexture);
-	treeSprite_3.setPosition(400,230);
+	treeSprite_3.setPosition(randomTreeX(),randomTreeY());
 	treeSprite_3.setScale(6,6);
 
 	treeSprite_3.setTexture(treeTexture);
-	treeSprite_3.setPosition(200,300);
+	treeSprite_3.setPosition(randomTreeX(),randomTreeY());
 	treeSprite_3.setScale(6,6);
 
 	treeSprite_4.setTexture(treeTexture);
-	treeSprite_4.setPosition(100,175);
+	treeSprite_4.setPosition(randomTreeX(),randomTreeY());
 	treeSprite_4.setScale(6,6);
 
 	//-- Score Variables --//
@@ -116,7 +116,7 @@ int main()
 					if(GameState == 1)
 					{ flapSound.play(); }
 					Player.setRotation(-40);
-					
+
 				}
 			}
 		}
@@ -178,7 +178,16 @@ int main()
 				Player.move(0,playerFallSpeed);
 				mainClock.restart();
 				Player.rotate(2);
-				
+
+				treeSprite.move(-3,0);
+				treeSprite_2.move(-3,0);
+				treeSprite_3.move(-3,0);
+				treeSprite_4.move(-3,0);
+
+				resetTree(treeSprite);
+				resetTree(treeSprite_2);
+				resetTree(treeSprite_3);
+				resetTree(treeSprite_4);
 			}
 
 			if(animationClock.getElapsedTime() >= sf::milliseconds(100))
@@ -195,7 +204,6 @@ int main()
 				currentScore += 1;
 				scoreText.setString("SCORE: " + itoa(currentScore));
 			}
-
 		}
 
 		//-- Update the menu bird animation --//
@@ -248,16 +256,14 @@ int main()
 		//-- Game Renders --//
 		if(GameState == 1)
 		{
-			window.draw(scoreText);
-
-			window.draw(Player);
-
 			window.draw(treeSprite);
 			window.draw(treeSprite_2);
 			window.draw(treeSprite_3);
 			window.draw(treeSprite_4);
 
-			
+			window.draw(scoreText);
+
+			window.draw(Player);
 		}
 
 		//-- Starting Renders --//
