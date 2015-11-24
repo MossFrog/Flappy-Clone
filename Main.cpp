@@ -38,13 +38,19 @@ int main()
 	bgSprite.setTexture(backGround);
 	bgSprite.setPosition(0,0);
 
+	bgSprite2.setTexture(backGround);
+	bgSprite2.setPosition(bgSprite.getGlobalBounds().width,0);
+
+	bgSprite3.setTexture(backGround);
+	bgSprite3.setPosition(bgSprite2.getGlobalBounds().width,0);
+
 	Player.setTexture(playerTexture);
 	Player.setTextureRect(sf::IntRect(0,0,16,16));
 	Player.setOrigin(Player.getGlobalBounds().width/2,Player.getGlobalBounds().height/2);
 	Player.setPosition(100,50);
 	Player.setScale(3,3);
 
-	//-- Dynamic sprites (the Trees) --//
+	//-- Dynamic sprites (the Trees and the Grass) --//
 	treeSprite.setTexture(treeTexture);
 	treeSprite.setPosition(randomTreeX(),randomTreeY());
 	treeSprite.setScale(6,6);
@@ -64,6 +70,10 @@ int main()
 	treeSprite_4.setTexture(treeTexture);
 	treeSprite_4.setPosition(randomTreeX(),randomTreeY());
 	treeSprite_4.setScale(6,6);
+
+	grassTile.setTexture(grassTexture);
+	int grassX;
+	int grassY;
 
 	//-- Score Variables --//
 	currentScore = 0;
@@ -85,6 +95,7 @@ int main()
 	mainClock.restart();
 	animationClock.restart();
 	menuClock.restart();
+	bgClock.restart();
 
 	//-- Audio Variables --//
 	sf::Sound flapSound;
@@ -179,17 +190,47 @@ int main()
 				mainClock.restart();
 				Player.rotate(2);
 
-				treeSprite.move(-3,0);
-				treeSprite_2.move(-3,0);
-				treeSprite_3.move(-3,0);
-				treeSprite_4.move(-3,0);
+				
+			}
 
+			if(bgClock.getElapsedTime() >= sf::milliseconds(3))
+			{
+				treeSprite.move(-1,0);
+				treeSprite_2.move(-1,0);
+				treeSprite_3.move(-1,0);
+				treeSprite_4.move(-1,0);
+
+				//-- Random tree reset function calls --//
 				resetTree(treeSprite);
 				resetTree(treeSprite_2);
 				resetTree(treeSprite_3);
 				resetTree(treeSprite_4);
+
+
+				//-- Shift the three chained background textures --//
+				bgSprite.move(-1,0);
+				bgSprite2.move(-1,0);
+				bgSprite3.move(-1,0);
+
+				if(bgSprite.getPosition().x <= -720)
+				{
+					bgSprite.setPosition(720, 0);
+				}
+
+				if(bgSprite2.getPosition().x <= -720)
+				{
+					bgSprite2.setPosition(720, 0);
+				}
+
+				if(bgSprite3.getPosition().x <= -720)
+				{
+					bgSprite3.setPosition(720, 0);
+				}
+				
+				bgClock.restart();
 			}
 
+			//-- Check if the animation clock has reached its pre requisite --//
 			if(animationClock.getElapsedTime() >= sf::milliseconds(100))
 			{
 				playerState += 16;
@@ -204,6 +245,8 @@ int main()
 				currentScore += 1;
 				scoreText.setString("SCORE: " + itoa(currentScore));
 			}
+
+
 		}
 
 		//-- Update the menu bird animation --//
@@ -245,6 +288,8 @@ int main()
 
 		//-- Render the Background --//
 		window.draw(bgSprite);
+		window.draw(bgSprite2);
+		window.draw(bgSprite3);
 
 		//-- Menu Renders --//
 		if(GameState == 0)

@@ -14,7 +14,13 @@ sf::Sprite Player;
 
 //-- Environmental Textures --//
 sf::Texture backGround;
+
 sf::Sprite bgSprite;
+sf::Sprite bgSprite2;
+sf::Sprite bgSprite3;
+
+sf::Texture grassTexture;
+sf::Sprite grassTile;
 
 sf::Texture treeTexture;
 sf::Sprite treeSprite;
@@ -45,6 +51,7 @@ sf::Clock mainClock;
 sf::Clock animationClock;
 sf::Clock countDownClock; // Countdown when the game starts
 sf::Clock menuClock; // Clock for any menu animation effects
+sf::Clock bgClock; // Clock for background parallax effects
 
 //-- Audio --//
 sf::SoundBuffer flapBuffer;
@@ -67,12 +74,17 @@ void loadResources()
 	if (!backGround.loadFromFile("backGround.jpg"))
 	{}
 	else
-	{ cout << "Loaded the texture 'background'" << endl; }
-
+	{ cout << "Loaded the texture 'Background'" << endl; }
+	
 	if (!treeTexture.loadFromFile("treeTexture.png"))
 	{}
 	else
 	{ cout << "Loaded the texture 'Tree'" << endl; }
+
+	if (!grassTexture.loadFromFile("grassTexture.png"))
+	{}
+	else
+	{ cout << "Loaded the texture 'Grass'" << endl; }
 
 
 	//-- Spritesheets --//
@@ -122,6 +134,25 @@ void resetTree(sf::Sprite & tree)
 	{
 		tree.setPosition(rand() % 200 + 720, randomTreeY());
 	}
+}
+
+float randomRotation90()
+{
+	float z = rand() % 360;
+
+	if(z < 90)
+	{ z = 0; }
+
+	else if(z >= 90 && z < 180)
+	{ z = 90; }
+
+	else if(z >= 180 && z < 270)
+	{ z = 180; }
+
+	else if(z >= 270)
+	{ z = 270; }
+
+	return z;
 }
 
 #endif
