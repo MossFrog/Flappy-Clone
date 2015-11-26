@@ -3,7 +3,7 @@
 
 int main()
 {
-	//--  Set the resolution to 9:16 preferred resolution for mobile phones --//
+	//-- Set the resolution to 16:9 preferred resolution for landscape mobile phones --//
 	//-- Disable keyrepeat events to make the game tap oriented --//
 	//-- Limit the framerate to prevent screen tearing --//
 	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
@@ -49,6 +49,10 @@ int main()
 	Player.setOrigin(Player.getGlobalBounds().width/2,Player.getGlobalBounds().height/2);
 	Player.setPosition(100,50);
 	Player.setScale(3,3);
+
+	sf::CircleShape myCircle;
+	myCircle.setFillColor(sf::Color::Red);
+	myCircle.setRadius(4);
 
 	//-- Dynamic sprites (the Trees and the Grass) --//
 	treeSprite.setTexture(treeTexture);
@@ -190,7 +194,8 @@ int main()
 				mainClock.restart();
 				Player.rotate(2);
 
-				
+				myCircle.setPosition(Player.getPosition());
+
 			}
 
 			if(bgClock.getElapsedTime() >= sf::milliseconds(3))
@@ -206,6 +211,7 @@ int main()
 				resetTree(treeSprite_3);
 				resetTree(treeSprite_4);
 
+				
 
 				//-- Shift the three chained background textures --//
 				bgSprite.move(-1,0);
@@ -226,7 +232,7 @@ int main()
 				{
 					bgSprite3.setPosition(720, 0);
 				}
-				
+
 				bgClock.restart();
 			}
 
@@ -309,6 +315,8 @@ int main()
 			window.draw(scoreText);
 
 			window.draw(Player);
+
+			window.draw(myCircle);
 		}
 
 		//-- Starting Renders --//
@@ -328,4 +336,25 @@ int main()
 	}
 
 	return 0;
+}
+
+
+
+bool colCheck(sf::Sprite s1, sf::Sprite s2)
+{
+	if(s1.getPosition().x <= s2.getPosition().x + s2.getGlobalBounds().width)
+	{
+		if(s1.getPosition().x >= s2.getPosition().x)
+		{
+			if(s1.getPosition().y >= s2.getPosition().y + s2.getGlobalBounds().height)
+			{
+				if(s1.getPosition().y <= s2.getPosition().y)
+				{
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
