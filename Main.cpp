@@ -7,7 +7,7 @@ int main()
 	//-- Disable keyrepeat events to make the game tap oriented --//
 	//-- Limit the framerate to prevent screen tearing --//
 	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
-	//window.setFramerateLimit(120);
+	//window.setFramerateLimit(60);
 	window.setKeyRepeatEnabled(false);
 
 	//-- Call the loadResources function --//
@@ -74,6 +74,25 @@ int main()
 	treeSprite_4.setTexture(treeTexture);
 	treeSprite_4.setPosition(randomTreeX(),randomTreeY());
 	treeSprite_4.setScale(6,6);
+
+	//-- Initialize the Gold Coins --//
+	goldAnimSeq = 0;
+
+	coin_1.setTexture(goldSheet);
+	coin_1.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
+	coin_1.setPosition(1000, 100);
+	coin_1.setScale(2, 2);
+
+	coin_2.setTexture(goldSheet);
+	coin_2.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
+	coin_2.setPosition(1100, 100);
+	coin_2.setScale(2, 2);
+
+	coin_3.setTexture(goldSheet);
+	coin_3.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
+	coin_3.setPosition(1200, 100);
+	coin_3.setScale(2, 2);
+	
 
 	grassTile.setTexture(grassTexture);
 	int grassX;
@@ -211,7 +230,34 @@ int main()
 				resetTree(treeSprite_3);
 				resetTree(treeSprite_4);
 
-				
+				//-- Shift and reset the coins --//
+				coin_1.move(-1, 0);
+				coin_2.move(-1, 0);
+				coin_3.move(-1, 0);
+
+				//-- Check if the coin is withing the gameplay bounds --//
+				checkCoinPos(coin_1);
+				checkCoinPos(coin_2);
+				checkCoinPos(coin_3);
+
+				//-- Do a simple box collision test for the coins --//
+				if (Player.getGlobalBounds().intersects(coin_1.getGlobalBounds()))
+				{
+					randomGoldReset(coin_1);
+					currentScore += 100;
+				}
+
+				if (Player.getGlobalBounds().intersects(coin_2.getGlobalBounds()))
+				{
+					randomGoldReset(coin_2);
+					currentScore += 100;
+				}
+
+				if (Player.getGlobalBounds().intersects(coin_3.getGlobalBounds()))
+				{
+					randomGoldReset(coin_3);
+					currentScore += 100;
+				}
 
 				//-- Shift the three chained background textures --//
 				bgSprite.move(-1,0);
@@ -245,6 +291,21 @@ int main()
 					playerState = 0;
 				}
 				Player.setTextureRect(sf::IntRect(playerState,0,16,16));
+
+				//-- Update the coin animations --//
+
+				goldAnimSeq += 18;
+				if (goldAnimSeq >= 108)
+				{
+					goldAnimSeq = 0;
+				}
+
+				coin_1.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
+				coin_2.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
+				coin_3.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
+
+
+
 				animationClock.restart();
 
 				//-- We also determine the score to increment every 100ms so its convenient to use this clock --//
@@ -278,6 +339,8 @@ int main()
 		{
 			playerFallSpeed = 25;
 		}
+
+		
 
 
 		//-- Kill the player if the bird falls out of bounds --//
@@ -317,6 +380,10 @@ int main()
 			window.draw(Player);
 
 			window.draw(myCircle);
+
+			window.draw(coin_1);
+			window.draw(coin_2);
+			window.draw(coin_3);
 		}
 
 		//-- Starting Renders --//
