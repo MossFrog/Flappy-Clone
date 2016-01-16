@@ -68,6 +68,7 @@ sf::Clock bgClock; // Clock for background parallax effects
 //-- Audio --//
 sf::SoundBuffer flapBuffer;
 sf::SoundBuffer cawBuffer;
+sf::SoundBuffer coinSoundBuffer;
 
 sf::Music mainTheme;
 
@@ -139,7 +140,7 @@ void loadResources()
 	}
 	else
 	{
-		cout << "Loaded the music file 'Randomize3.wav'" << endl;
+		cout << "Loaded the audio file 'Randomize3.wav'" << endl;
 	}
 
 	if (!cawBuffer.loadFromFile("CrowCaw.ogg"))
@@ -147,7 +148,15 @@ void loadResources()
 	}
 	else
 	{
-		cout << "Loaded 'CrowCaw.ogg'" << endl;
+		cout << "Loaded the audio file 'CrowCaw.ogg'" << endl;
+	}
+
+	if (!coinSoundBuffer.loadFromFile("Score.ogg"))
+	{
+	}
+	else
+	{
+		cout << "Loaded the audio file 'Score.ogg'" << endl;
 	}
 
 	if (!mainTheme.openFromFile("Blind Shift.ogg"))

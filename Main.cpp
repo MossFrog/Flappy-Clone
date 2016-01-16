@@ -129,6 +129,10 @@ int main()
 	cawSound.setBuffer(cawBuffer);
 	cawSound.setVolume(75);
 
+	sf::Sound coinSound;
+	coinSound.setBuffer(coinSoundBuffer);
+	coinSound.setVolume(75);
+
 	mainTheme.setLoop(true);
 	mainTheme.setVolume(100);
 	mainTheme.play();
@@ -245,18 +249,21 @@ int main()
 				{
 					randomGoldReset(coin_1);
 					currentScore += 100;
+					coinSound.play();
 				}
 
 				if (Player.getGlobalBounds().intersects(coin_2.getGlobalBounds()))
 				{
 					randomGoldReset(coin_2);
 					currentScore += 100;
+					coinSound.play();
 				}
 
 				if (Player.getGlobalBounds().intersects(coin_3.getGlobalBounds()))
 				{
 					randomGoldReset(coin_3);
 					currentScore += 100;
+					coinSound.play();
 				}
 
 				//-- Shift the three chained background textures --//
