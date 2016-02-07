@@ -42,6 +42,11 @@ int main()
 	GameOverText.setString("Game Over");
 	GameOverText.setPosition(250,100);
 
+	restartText.setPosition(230, 130);
+	restartText.setString("- Restart -");
+	restartText.setFont(mainFont);
+	restartText.setColor(sf::Color::White);
+
 	//-- Set the static sprites --//
 	bgSprite.setTexture(backGround);
 	bgSprite.setPosition(0,0);
@@ -170,7 +175,33 @@ int main()
 		//-- Get the Mouse position to check button relativity --//
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 
-		cout << mousePos.x << " " << mousePos.y << endl;
+		//-- Uncomment to see live feed of the mouse position in the console window --//
+		//cout << mousePos.x << " " << mousePos.y << endl;
+
+		if (restartText.getGlobalBounds().contains(mousePos.x, mousePos.y) && GameState == 2)
+		{
+			restartText.setColor(sf::Color::Black);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				GameState = 3;
+				countDownClock.restart();
+
+				//-- If this method is called reset all variables to prepare a game restart --//
+				playerState = 0;
+				playerFallSpeed = 1;
+				countDown = 0;
+				countDownText.setString("3");
+				Player.setPosition(100, 50);
+				Player.setRotation(340);
+				currentScore = 0;
+				scoreText.setString("SCORE: 0");
+			}
+		}
+
+		else
+		{
+			restartText.setColor(sf::Color::White);
+		}
 
 		if (startText.getGlobalBounds().contains(mousePos.x, mousePos.y) && GameState == 0)
 		{
@@ -445,6 +476,7 @@ int main()
 		if(GameState == 2)
 		{
 			window.draw(GameOverText);
+			window.draw(restartText);
 		}
 
 		window.display();
