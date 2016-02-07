@@ -49,6 +49,8 @@ sf::Sprite menuBird;
 sf::Font mainFont;
 sf::Text menuText;
 sf::Text countDownText;
+sf::Text startText;
+
 
 //-- Score Variables --//
 sf::Text scoreText;
@@ -57,6 +59,7 @@ int currentScore;
 
 //-- Game over Variables --//
 sf::Text GameOverText;
+sf::Text restartText;
 
 //-- Clocks --//
 sf::Clock mainClock;

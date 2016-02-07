@@ -24,6 +24,14 @@ int main()
 	menuBird.setTextureRect(sf::IntRect(0,0,16,16));
 	int menuBirdState = 0;
 
+
+	startText.setFont(mainFont);
+	startText.setString("- Start -");
+	startText.setPosition(100, 200);
+	startText.setColor(sf::Color::White);
+
+	
+
 	//-- Starting Variables --//
 	countDownText.setFont(mainFont);
 	countDownText.setPosition(350,100);
@@ -159,6 +167,37 @@ int main()
 			}
 		}
 
+		//-- Get the Mouse position to check button relativity --//
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+
+		cout << mousePos.x << " " << mousePos.y << endl;
+
+		if (startText.getGlobalBounds().contains(mousePos.x, mousePos.y) && GameState == 0)
+		{
+			startText.setColor(sf::Color::Black);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				GameState = 3;
+				countDownClock.restart();
+
+				//-- If this method is called reset all variables to prepare a game restart --//
+				playerState = 0;
+				playerFallSpeed = 1;
+				countDown = 0;
+				countDownText.setString("3");
+				Player.setPosition(100, 50);
+				Player.setRotation(340);
+				currentScore = 0;
+				scoreText.setString("SCORE: 0");
+			}
+		}
+
+		else
+		{
+			startText.setColor(sf::Color::White);
+		}
+
+		
 
 		//-- Start the game if G key is pressed --//
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
@@ -372,6 +411,7 @@ int main()
 		{
 			window.draw(menuText);
 			window.draw(menuBird);
+			window.draw(startText);
 		}
 
 		//-- Game Renders --//
@@ -386,7 +426,8 @@ int main()
 
 			window.draw(Player);
 
-			window.draw(myCircle);
+			//-- Debugging circle displays the player's origin co-ordinate --//
+			//window.draw(myCircle);
 
 			window.draw(coin_1);
 			window.draw(coin_2);
