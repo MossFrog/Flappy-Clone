@@ -41,7 +41,11 @@ int goldAnimSeq;
 
 
 //-- Enemies --//
+sf::Texture fireSheet;
 
+sf::Sprite fireball_1;
+sf::Sprite fireball_2;
+sf::Sprite fireball_3;
 
 //-- Menu variables --//
 sf::Texture idleBird;
@@ -126,6 +130,14 @@ void loadResources()
 	else
 	{
 		cout << "Loaded the spritesheet for 'gold coin'" << endl;
+	}
+
+	if (!fireballSheet.loadFromFile("fireball.png"))
+	{
+	}
+	else
+	{
+		cout << "Loaded the spritesheet for 'fireball'" << endl;
 	}
 
 	//-- Menu --//

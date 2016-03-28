@@ -5,7 +5,7 @@ int main()
 {
 	//-- Set the resolution to 16:9 preferred resolution for landscape mobile phones --//
 	//-- Disable keyrepeat events to make the game tap oriented --//
-	//-- Limit the framerate to prevent screen tearing --//
+	//-- Limit the framerate to prevent screen tearing (although this does cause dirty pixels) --//
 	sf::RenderWindow window(sf::VideoMode(720, 405), "Flappy Bird Clone", sf::Style::Close);
 	//window.setFramerateLimit(60);
 	window.setKeyRepeatEnabled(false);
@@ -42,6 +42,7 @@ int main()
 	GameOverText.setString("Game Over");
 	GameOverText.setPosition(250,100);
 
+	//-- Restart button --//
 	restartText.setPosition(230, 130);
 	restartText.setString("- Restart -");
 	restartText.setFont(mainFont);
@@ -105,6 +106,9 @@ int main()
 	coin_3.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
 	coin_3.setPosition(1200, 100);
 	coin_3.setScale(2, 2);
+
+	//-- Initialize the Fireballs --//
+	
 	
 
 	grassTile.setTexture(grassTexture);
