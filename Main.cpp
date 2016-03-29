@@ -108,19 +108,22 @@ int main()
 	coin_3.setScale(2, 2);
 
 	//-- Initialize the Fireballs --//
-
 	//-- The fireballs will all have random alternating segments from the original spritesheet, giving them an async effect --//
 
 	fireball_1.setTexture(fireSheet);
 	fireball_1.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
-	fireball_1.setPosition(150, 150);
+	fireball_1.setPosition(1350, 150);
 	fireball_1.setScale(-1, 1);
 
 	fireball_2.setTexture(fireSheet);
 	fireball_2.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
-	fireball_2.setPosition(300, 150);
+	fireball_2.setPosition(1450, 250);
 	fireball_2.setScale(-1, 1);
 	
+	fireball_3.setTexture(fireSheet);
+	fireball_3.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
+	fireball_3.setPosition(1450, 150);
+	fireball_3.setScale(-1, 1);
 
 	grassTile.setTexture(grassTexture);
 	int grassX;
@@ -374,6 +377,17 @@ int main()
 				}
 
 				bgClock.restart();
+
+				//-- Shift the fireballs --//
+
+				fireball_1.move(-2, 0);
+				fireball_2.move(-2, 0);
+				fireball_3.move(-2, 0);
+
+				//-- Update the texture rectangles of the fireballs --//
+				fireball_1.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
+				fireball_2.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
+				fireball_3.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
 			}
 
 			//-- Check if the animation clock has reached its pre requisite --//
@@ -397,8 +411,6 @@ int main()
 				coin_1.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
 				coin_2.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
 				coin_3.setTextureRect(sf::IntRect(goldAnimSeq, 0, 18, 20));
-
-
 
 				animationClock.restart();
 
@@ -460,8 +472,6 @@ int main()
 			window.draw(menuText);
 			window.draw(menuBird);
 			window.draw(startText);
-			window.draw(fireball_1);
-			window.draw(fireball_2);
 		}
 
 		//-- Game Renders --//
@@ -482,6 +492,10 @@ int main()
 			window.draw(coin_1);
 			window.draw(coin_2);
 			window.draw(coin_3);
+
+			window.draw(fireball_1);
+			window.draw(fireball_2);
+			window.draw(fireball_3);
 
 			
 		}

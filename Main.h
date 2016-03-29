@@ -255,7 +255,6 @@ void checkCoinPos(sf::Sprite & goldSprite)
 }
 
 //-- Returns a Random Segment from the Fireball Spritesheet --//
-//-- Note this is a predictable random --//
 int randomFireballSeq()
 {
 	RandGen newGen;
@@ -263,6 +262,22 @@ int randomFireballSeq()
 
 	sequence = sequence * fireSheet.getSize().x / 4;
 	return sequence;
+}
+
+int randomFireballY()
+{
+	RandGen newGen;
+	int posY = newGen.RandInt(50, 350);
+
+	return posY;
+}
+
+int randomFireballX()
+{
+	RandGen newGen;
+	int posX = newGen.RandInt(1350, 1650);
+
+	return posX;
 }
 
 #endif
