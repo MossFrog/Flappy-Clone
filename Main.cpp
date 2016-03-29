@@ -110,14 +110,16 @@ int main()
 	//-- Initialize the Fireballs --//
 
 	//-- The fireballs will all have random alternating segments from the original spritesheet, giving them an async effect --//
-	fireRand1 = 0;
-	fireRand2 = 0;
-	fireRand3 = 0;
 
 	fireball_1.setTexture(fireSheet);
 	fireball_1.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
 	fireball_1.setPosition(150, 150);
 	fireball_1.setScale(-1, 1);
+
+	fireball_2.setTexture(fireSheet);
+	fireball_2.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
+	fireball_2.setPosition(300, 150);
+	fireball_2.setScale(-1, 1);
 	
 
 	grassTile.setTexture(grassTexture);
@@ -140,11 +142,13 @@ int main()
 	int GameState = 0;
 	int countDown = 0;
 
-	//-- initialize the main game clock and animation clock --//
+	//-- Clock initialization --//
 	mainClock.restart();
 	animationClock.restart();
 	menuClock.restart();
 	bgClock.restart();
+	fireballClock.restart();
+
 
 	//-- Audio Variables --//
 	sf::Sound flapSound;
@@ -457,6 +461,7 @@ int main()
 			window.draw(menuBird);
 			window.draw(startText);
 			window.draw(fireball_1);
+			window.draw(fireball_2);
 		}
 
 		//-- Game Renders --//

@@ -75,6 +75,7 @@ sf::Clock animationClock;
 sf::Clock countDownClock; // Countdown when the game starts
 sf::Clock menuClock; // Clock for any menu animation effects
 sf::Clock bgClock; // Clock for background parallax effects
+sf::Clock fireballClock;
 
 //-- Audio --//
 sf::SoundBuffer flapBuffer;
@@ -257,7 +258,9 @@ void checkCoinPos(sf::Sprite & goldSprite)
 //-- Note this is a predictable random --//
 int randomFireballSeq()
 {
-	int sequence = rand() % 4;
+	RandGen newGen;
+	int sequence = newGen.RandInt(0, 3);
+
 	sequence = sequence * fireSheet.getSize().x / 4;
 	return sequence;
 }
