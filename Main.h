@@ -47,6 +47,10 @@ sf::Sprite fireball_1;
 sf::Sprite fireball_2;
 sf::Sprite fireball_3;
 
+int fireRand1 = 0;
+int fireRand2 = 0;
+int fireRand3 = 0;
+
 //-- Menu variables --//
 sf::Texture idleBird;
 sf::Sprite menuBird;
@@ -132,7 +136,7 @@ void loadResources()
 		cout << "Loaded the spritesheet for 'gold coin'" << endl;
 	}
 
-	if (!fireballSheet.loadFromFile("fireball.png"))
+	if (!fireSheet.loadFromFile("fireball.png"))
 	{
 	}
 	else
@@ -247,6 +251,15 @@ void checkCoinPos(sf::Sprite & goldSprite)
 	{
 		randomGoldReset(goldSprite);
 	}
+}
+
+//-- Returns a Random Segment from the Fireball Spritesheet --//
+//-- Note this is a predictable random --//
+int randomFireballSeq()
+{
+	int sequence = rand() % 4;
+	sequence = sequence * fireSheet.getSize().x / 4;
+	return sequence;
 }
 
 #endif

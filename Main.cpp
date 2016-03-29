@@ -108,7 +108,16 @@ int main()
 	coin_3.setScale(2, 2);
 
 	//-- Initialize the Fireballs --//
-	
+
+	//-- The fireballs will all have random alternating segments from the original spritesheet, giving them an async effect --//
+	fireRand1 = 0;
+	fireRand2 = 0;
+	fireRand3 = 0;
+
+	fireball_1.setTexture(fireSheet);
+	fireball_1.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
+	fireball_1.setPosition(150, 150);
+	fireball_1.setScale(-1, 1);
 	
 
 	grassTile.setTexture(grassTexture);
@@ -447,6 +456,7 @@ int main()
 			window.draw(menuText);
 			window.draw(menuBird);
 			window.draw(startText);
+			window.draw(fireball_1);
 		}
 
 		//-- Game Renders --//
@@ -467,6 +477,8 @@ int main()
 			window.draw(coin_1);
 			window.draw(coin_2);
 			window.draw(coin_3);
+
+			
 		}
 
 		//-- Starting Renders --//
