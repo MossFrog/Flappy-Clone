@@ -264,18 +264,18 @@ int randomFireballSeq()
 	return sequence;
 }
 
-int randomFireballY()
+int randomFireballSpeed()
 {
 	RandGen newGen;
-	int posY = newGen.RandInt(50, 350);
+	int speed = newGen.RandInt(0, 2);
 
-	return posY;
+	return speed;
 }
 
 int randomFireballX()
 {
 	RandGen newGen;
-	int posX = newGen.RandInt(1350, 1650);
+	int posX = newGen.RandInt(250, 950);
 
 	return posX;
 }

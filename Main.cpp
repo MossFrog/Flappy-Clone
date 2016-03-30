@@ -110,20 +110,32 @@ int main()
 	//-- Initialize the Fireballs --//
 	//-- The fireballs will all have random alternating segments from the original spritesheet, giving them an async effect --//
 
+	int fireball_1Speed = 0;
+	int fireball_2Speed = 0;
+	int fireball_3Speed = 0;
+
+
 	fireball_1.setTexture(fireSheet);
 	fireball_1.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
-	fireball_1.setPosition(1350, 150);
+	fireball_1.setPosition(randomFireballX(), 450);
 	fireball_1.setScale(-1, 1);
+	fireball_1.setOrigin(32, 32);
+	fireball_1.setRotation(90);
+	
 
 	fireball_2.setTexture(fireSheet);
 	fireball_2.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
-	fireball_2.setPosition(1450, 250);
+	fireball_2.setPosition(randomFireballX(), 450);
 	fireball_2.setScale(-1, 1);
+	fireball_2.setOrigin(32, 32);
+	fireball_2.setRotation(90);
 	
 	fireball_3.setTexture(fireSheet);
 	fireball_3.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
-	fireball_3.setPosition(1450, 150);
+	fireball_3.setPosition(randomFireballX(), 450);
 	fireball_3.setScale(-1, 1);
+	fireball_3.setOrigin(32, 32);
+	fireball_3.setRotation(90);
 
 	grassTile.setTexture(grassTexture);
 	int grassX;
@@ -189,6 +201,13 @@ int main()
 					Player.setRotation(-40);
 
 				}
+
+				//-- D is a reserved debugging key --//
+				if (event.key.code == sf::Keyboard::D)
+				{
+					
+
+				}
 			}
 		}
 
@@ -230,7 +249,7 @@ int main()
 			{
 				GameState = 3;
 				countDownClock.restart();
-
+				
 				//-- If this method is called reset all variables to prepare a game restart --//
 				playerState = 0;
 				playerFallSpeed = 1;
@@ -292,6 +311,9 @@ int main()
 			else if(countDown == 3)
 			{
 				GameState = 1;
+				
+				//-- Make sure a fireball doesnt start the moment the countdown ends. --//
+				fireballClock.restart();
 			}
 		}
 
@@ -380,9 +402,30 @@ int main()
 
 				//-- Shift the fireballs --//
 
-				fireball_1.move(-2, 0);
-				fireball_2.move(-2, 0);
-				fireball_3.move(-2, 0);
+				fireball_1.move(-1, 0);
+				fireball_2.move(-1, 0);
+				fireball_3.move(-1, 0);
+
+				fireball_1.move(0, -fireball_1Speed);
+				fireball_2.move(0, -fireball_2Speed);
+				fireball_3.move(0, -fireball_3Speed);
+
+				//-- Make sure the fireballs fall back to earth --//
+
+				if (fireball_1.getPosition().y <= 20)
+				{
+					fireball_1Speed = -fireball_1Speed;
+				}
+
+				if (fireball_2.getPosition().y <= 35)
+				{
+					fireball_2Speed = -fireball_2Speed;
+				}
+
+				if (fireball_3.getPosition().y <= 75)
+				{
+					fireball_3Speed = -fireball_3Speed;
+				}
 
 				//-- Update the texture rectangles of the fireballs --//
 				fireball_1.setTextureRect(sf::IntRect(randomFireballSeq(), 0, 64, 64));
@@ -419,7 +462,18 @@ int main()
 				scoreText.setString("SCORE: " + itoa(currentScore));
 			}
 
+			if (fireballClock.getElapsedTime() >= sf::milliseconds(3000))
+			{
+				fireball_1.setPosition(randomFireballX(), 450);
+				fireball_2.setPosition(randomFireballX(), 450);
+				fireball_3.setPosition(randomFireballX(), 450);
 
+				fireball_1Speed = randomFireballSpeed();
+				fireball_2Speed = randomFireballSpeed();
+				fireball_3Speed = randomFireballSpeed();
+
+				fireballClock.restart();
+			}
 		}
 
 		//-- Update the menu bird animation --//
